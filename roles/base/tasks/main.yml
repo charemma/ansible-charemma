@@ -1,0 +1,30 @@
+- name: "Install required packages"
+  become: yes
+  apt: name={{ item }}
+  with_items: 
+    -  x11-xserver-utils
+
+- name: "Create directory {{ workspace }}"
+  file: path={{ workspace }} state=directory mode=0755 owner={{ansible_user}} group={{ ansible_user }}
+
+- name: "Create directory structure in {{ workspace }}"
+  file: path={{ workspace }}/{{ item }} state=directory mode=0755 owner={{ansible_user}} group={{ ansible_user }}
+  with_items:
+    - pkg
+    - bin
+    - bashrc.d
+
+- name: "Deploy .bashrc"
+  template: src=bashrc.j2 dest={{ ansible_env.HOME}}/.bashrc
+
+- name: "Deploy tmux.conf"
+  template: src=tmux.j2 dest={{ ansible_env.HOME}}/.tmux.conf
+
+- name: "Deploy {{workspace}}/bashrc.d/theme"
+  template: src=bashrcd_theme.j2 dest={{ workspace }}/bashrc.d/theme
+
+- name: "Clone repo solarized"
+  git: repo=https://github.com/altercation/solarized.git dest={{ workspace }}/pkg/solarized
+
+- name: "Clone repo dircolors-solarized"
+  git: repo=https://github.com/seebi/dircolors-solarized.git dest={{ workspace }}/pkg/dircolors-solarized
