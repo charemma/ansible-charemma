@@ -4,6 +4,6 @@
   with_items:
     - git
     - gitg
-    - tig 
-    - meld 
+    - tig
+    - meld
     - nmap
