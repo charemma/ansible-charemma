@@ -19,8 +19,8 @@
     - colors
 
 - name: "Install pathogen"
-  #  shell: curl -LSso {{ vim_dir }}/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-  get_url: url=https://tpo.pe/pathogen.vim dest={{ vim_dir }}/autoload/pathogen.vim mode=0640
+  #  shell: curl -LSso {{ vim_dir }}/autoload/pathogen.vim http://tpo.pe/pathogen.vim
+  get_url: url=http://tpo.pe/pathogen.vim dest={{ vim_dir }}/autoload/pathogen.vim mode=0640
 
 - name: "Install theme solarized"
   git: repo=https://github.com/altercation/vim-colors-solarized.git dest={{ vim_dir }}/bundle/vim-colors-solarized version=master
