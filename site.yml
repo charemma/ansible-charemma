@@ -1,4 +1,6 @@
 - hosts: all
+  vars:
+      workspace: "{{ ansible_env.HOME }}/workspace"
   roles:
       - { role: base, tags: ['base'] }
       - { role: developer, tags: ['developer'] }
