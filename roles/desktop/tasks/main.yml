@@ -13,10 +13,28 @@
   shell: gsettings set org.gnome.desktop.interface monospace-font-name 'Fira Mono Regular 14'
   ignore_errors: yes
 
+- name: "Add Spotify repository signing key"      
+  become: yes
+  apt_key: keyserver=keyserver.ubuntu.com id=BBEBDCB318AD50EC6865090613B00F1FD2C19886
+
+- name: "Add Spotify repository"      
+  become: yes
+  apt_repository: repo='deb http://repository.spotify.com stable non-free' state=present
+
+ 
+- name: "Add Google chrome repository signing key"      
+  become: yes
+  apt_key: keyserver=keyserver.ubuntu.com id=D38B4796
+
+- name: "Add google chrome repository"
+  become: yes
+  apt_repository: repo='deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' state=present
+ 
 - name: "Install applications"
   become: yes
   apt: name={{ item }}
   with_items:
-    - corebird
     - vlc
     - tmux
+    - google-chrome-stable
+    - spotify-client
