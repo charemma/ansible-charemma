@@ -38,3 +38,10 @@
     - tmux
     - google-chrome-stable
     - spotify-client
+
+- name: "Enable unity workspaces"
+  shell: gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ {{ item }}
+  with_items:
+    - hsize 4
+    - vsize 1
+
