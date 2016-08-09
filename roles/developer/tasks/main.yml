@@ -1,4 +1,4 @@
-- name: "Instal developer tools"
+- name: "Install developer tools"
   become: yes
   apt: name="{{ item }}"
   with_items:
