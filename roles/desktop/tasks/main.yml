@@ -45,3 +45,13 @@
     - hsize 4
     - vsize 1
 
+- name: "Move unity dash to bottom"
+  shell: gsettings set com.canonical.Unity.Launcher launcher-position Bottom
+
+- name: "Setup unity time/clock indicator"
+  shell: gsettings set com.canonical.indicator.datetime {{ item }}
+  with_items:
+      - show-clock true
+      - show-date true
+      - show-day true
+      - show-seconds false
