@@ -36,3 +36,19 @@
 
 - name: "Install plugin python-mode"
   git: repo=https://github.com/klen/python-mode.git dest={{ vim_dir}}/bundle/python-mode version=da4bfe5
+
+- name: "Install dependencies for command-t"
+  become: yes
+  apt: name={{ item }}
+  with_items:
+    - ruby
+    - ruby-dev
+    - rake
+
+- name: "Install plugin command-t"
+  git: repo=https://github.com/wincent/command-t.git dest={{ vim_dir}}/bundle/command-t version=master
+  register: commandt
+
+- name: "Build C extension for command-t"
+  shell: rake make chdir={{ vim_dir }}/bundle/command-t
+  when: commandt.changed
