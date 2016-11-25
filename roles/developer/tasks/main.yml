@@ -1,13 +1,14 @@
 - name: "Install developer tools"
   become: yes
-  apt: name="{{ item }}"
+  apt: name={{ item }}
   with_items:
     - git
     - gitg
     - tig
     - meld
     - nmap
-
+  when: ansible_distribution == 'Ubuntu'
+ 
 - name: "Install ipython"
   become: yes
   pip: name='ipython[all]'

@@ -3,12 +3,13 @@
   apt: name={{ item }}
   with_items: 
     -  x11-xserver-utils
+  when: ansible_distribution == 'Ubuntu'
 
 - name: "Create directory {{ workspace }}"
-  file: path={{ workspace }} state=directory mode=0755 owner={{ansible_user}} group={{ ansible_user }}
+  file: path={{ workspace }} state=directory mode=0755 owner={{ansible_user}}
 
 - name: "Create directory structure in {{ workspace }}"
-  file: path={{ workspace }}/{{ item }} state=directory mode=0755 owner={{ansible_user}} group={{ ansible_user }}
+  file: path={{ workspace }}/{{ item }} state=directory mode=0755 owner={{ansible_user}}
   with_items:
     - pkg
     - bin
