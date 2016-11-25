@@ -37,4 +37,6 @@
 
 - name: "Install plugin python-mode"
   git: repo=https://github.com/klen/python-mode.git dest={{ vim_dir}}/bundle/python-mode version=da4bfe5
+
+- name: "Install plugin vim-supertab"
   git: repo=https://github.com/ervandew/supertab.git dest={{ vim_dir }}/bundle/supertab version=master
