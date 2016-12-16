@@ -49,7 +49,7 @@ set tabpagemax=20
 set showmatch 
 
 " ignore patterns (e.g. used by command-t)
-set wildignore+=*.o,*.d,*.P,*.ELF,*.bin,*.so,*.pyc,*pyo,*.obj,.git,*.gcda,*.gcno,env/**,venv/**
+set wildignore+=*.o,*.d,*.P,*.ELF,*.bin,*.so,*.pyc,*pyo,*.obj,.git,*.gcda,*.gcno,env/**,venv/**,venv-*/**
 
 " enable system clipboard support.
 set clipboard=unnamedplus
@@ -77,7 +77,6 @@ set guioptions-=T
 " Search settings 
 " Remove marked matches after search command
 nnoremap <CR> :nohlsearch<CR>/<BS><CR>
-nnoremap <C-b> :!make<CR>
 
 " Highlight search terms...
 set hlsearch
@@ -148,3 +147,6 @@ let g:vim_markdown_folding_disabled=1
 " jshint 
 let jshint2_save = 1
 let jshint2_close = 0
+
+" Place CommandT matches appear from top to bottom with the topmost being selected
+let g:CommandTMatchWindowReverse = 0

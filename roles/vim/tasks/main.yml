@@ -4,15 +4,16 @@
   with_items:
     - vim-nox
     - xclip
+  when: ansible_distribution == 'Ubuntu'
 
 - name: "Creating .vimrc"
   template: src=vimrc.j2 dest={{ vimrc }}
 
 - name: "Create dir .vim"
-  file: path={{ vim_dir }} state=directory mode=0755 owner={{ansible_user}} group={{ ansible_user }}
+  file: path={{ vim_dir }} state=directory mode=0755 owner={{ansible_user}}
 
 - name: "Create directory structure in .vim"
-  file: path={{ vim_dir }}/{{ item }} state=directory mode=0755 owner={{ansible_user}} group={{ ansible_user }}
+  file: path={{ vim_dir }}/{{ item }} state=directory mode=0755 owner={{ansible_user}}
   with_items:
     - autoload
     - bundle
@@ -52,3 +53,6 @@
 - name: "Build C extension for command-t"
   shell: rake make chdir={{ vim_dir }}/bundle/command-t
   when: commandt.changed
+
+- name: "Install plugin vim-supertab"
+  git: repo=https://github.com/ervandew/supertab.git dest={{ vim_dir }}/bundle/supertab version=master

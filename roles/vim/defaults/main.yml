@@ -1,2 +1,2 @@
-vimrc: /home/{{ ansible_user }}/.vimrc
-vim_dir: /home/{{ ansible_user }}/.vim
+vimrc: "{{ ansible_env.HOME}}/.vimrc"
+vim_dir: "{{ ansible_env.HOME }}/.vim"
