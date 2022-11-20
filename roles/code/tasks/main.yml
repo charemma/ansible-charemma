@@ -1,5 +1,4 @@
 ---
-
 - name: "Install developer tools"
   become: yes
   ansible.builtin.apt:
@@ -17,13 +16,13 @@
   community.general.git_config:
     name: user.name
     scope: global
-    value: "Charalambos Emmanouilidis"
+    value: "{{ USER_NAME }}" 
 
 - name: "Update user.email in .gitconfig"
   community.general.git_config:
     name: user.email
     scope: global
-    value: "me@charemma.de"
+    value: "{{ USER_EMAIL }}"
 
 - name: "Update editor in .gitconfig"
   community.general.git_config:
