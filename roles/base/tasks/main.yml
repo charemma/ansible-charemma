@@ -1,0 +1,67 @@
+---
+
+- name: "Install base applications"
+  become: yes
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - apt-file
+    - curl
+    - flameshot
+    - fonts-firacode
+    - fonts-font-awesome
+    - gcc
+    - git
+    - i3
+    - jq
+    - keepassxc
+    - libfontconfig-dev
+    - libx11-dev
+    - libxext-dev
+    - libxt-dev
+    - mplayer
+    - rofi
+    - suckless-tools
+    - tmux
+    - vim
+    - xclip
+    - xterm
+    - zathura
+
+- name: "Clone repository alacritty"
+  ansible.builtin.git:
+    repo: 'https://github.com/alacritty/alacritty.git'
+    dest: "{{ ansible_env.HOME }}/alacritty"
+    update: no
+
+- name: "Build alacritty in docker rust container"
+  ansible.builtin.shell: |
+    git pull
+    docker run -u $(id -u):$(id -g) --rm -v $(pwd):/src -w /src rust cargo build --release
+  args:
+    chdir: "{{ ansible_env.HOME }}/alacritty"
+    creates: target/release/alacritty
+  register: alacritty
+
+- name: "Install alacritty binary"
+  become: yes
+  ansible.builtin.copy:
+    src: "{{ ansible_env.HOME }}/alacritty/target/release/alacritty"
+    dest: /usr/local/bin
+    mode: 0755
+  when: alacritty.changed
+
+- name: "Clone repository plan9port"
+  ansible.builtin.git:
+    repo: 'https://github.com/charemma/plan9port'
+    dest: "{{ ansible_env.HOME }}/plan9"
+    update: no
+
+- name: "Build Plan9"
+  ansible.builtin.shell: |
+    git pull
+    ./INSTALL
+  args:
+    chdir: "{{ ansible_env.HOME }}/plan9"
+    creates: install.sum

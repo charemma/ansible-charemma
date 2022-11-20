@@ -1,0 +1,42 @@
+---
+
+- name: "Install developer tools"
+  become: yes
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - docker.io
+    - git
+    - golang-go
+    - meld
+    - shellcheck
+    - tig
+
+- name: "Update user.name in .gitconfig"
+  community.general.git_config:
+    name: user.name
+    scope: global
+    value: "Charalambos Emmanouilidis"
+
+- name: "Update user.email in .gitconfig"
+  community.general.git_config:
+    name: user.email
+    scope: global
+    value: "me@charemma.de"
+
+- name: "Update editor in .gitconfig"
+  community.general.git_config:
+     name: core.editor
+     scope: global
+     value: vim
+
+- name: "Adding user {{ ansible_user_id }} to groups"
+  user:
+    name: "{{ ansible_user_id }}"
+    groups:
+      - sudo
+      - docker
+    append: yes
+  become: yes
+

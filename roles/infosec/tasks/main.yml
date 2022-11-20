@@ -1,0 +1,13 @@
+---
+
+- name: "Install infosec applications"
+  become: yes
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - binwalk
+    - gnuradio
+    - golang-go
+    - nmap
+    - wireshark
