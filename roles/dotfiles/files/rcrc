@@ -1,0 +1,2 @@
+set PATH=$HOME/plan9/bin:$PATH
+set PATH=$HOME/.local/bin
