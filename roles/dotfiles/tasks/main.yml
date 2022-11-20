@@ -46,7 +46,7 @@
   register: i3config
 
 - name: "Deploy .config/i3status/config"
-  ansible.builtin.copy: src=i3status dest={{ ansible_env.HOME}}/.config/i3status/config
+  ansible.builtin.template: src=i3status.j2 dest={{ ansible_env.HOME}}/.config/i3status/config
   register: i3status
 
 - name: "Restart i3"

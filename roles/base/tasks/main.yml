@@ -21,6 +21,7 @@
     - libxext-dev
     - libxt-dev
     - mplayer
+    - openvpn
     - rofi
     - suckless-tools
     - tmux
