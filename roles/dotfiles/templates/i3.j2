@@ -181,8 +181,7 @@ mode "resize" {
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape or $mod+r
+        # back to normal: Enter or Escape or $mod+
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
@@ -190,34 +189,24 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
         position top
         status_command i3status
+        separator_symbol " "
         colors {
-      background #002b36
-      statusline #839496
-      separator  #586e75
-      focused_workspace  #b58900 #b58900 #002b36
-      active_workspace   #586e75 #586e75 #002b36
-      inactive_workspace #073642 #002b36 #839496
-      urgent_workspace   #dc322f #dc322f #fdf6e3
+          background {{ brblack }}
+          statusline {{ color_base0 }}
+          separator  {{ brblack }}
+          focused_workspace  {{ yellow }} {{ yellow }} {{ brblack }}
+          active_workspace   {{ color_base01 }} {{ color_base01 }} {{ brblack }}
+          inactive_workspace {{ color_base02 }} {{ brblack }} {{ color_base0 }}
+          urgent_workspace   {{ red }} {{ red }} {{ brwhite }}
         }
 }
 
-# Solarized colors
-# https://ethanschoonover.com/solarized/#usage-development
-
-# Color Class               Border      BG         FG
-#client.focused             #268bd2   #268bd2    #002b36
-#client.focused_inactive    #839496   #073642    #fdf6e3
-#client.unfocused           #839496   #073642    #fdf6e3
-#client.urgent              #6c71c4   #6c71c4    #6c71c4
-
-
-client.focused          	#002b36 #586e75 #fdf6e3 #268bd2
-client.focused_inactive 	#002b36 #073642 #839496 #073642
-client.unfocused        	#002b36 #073642 #839496 #073642
-client.urgent           	#002b36 #dc322f #fdf6e3 #002b36
+client.focused          	{{ brblack }} {{ color_base01 }} {{ brwhite }} {{ blue }}
+client.focused_inactive 	{{ brblack }} {{ color_base02 }} {{ color_base0 }} {{ color_base02 }}
+client.unfocused        	{{ brblack }} {{ color_base02 }} {{ color_base0 }} {{ color_base02 }}
+client.urgent           	{{ brblack }} {{ red }} {{ brwhite }} {{ brblack }}
