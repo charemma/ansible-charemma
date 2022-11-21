@@ -4,3 +4,49 @@ font: "Hack Nerd Font Mono"
 font_size_small: 8
 font_size_regular: 11
 font_size_large: 21
+
+# https:/en.wikipedia.org/wiki/Solarized
+color_bg: "#002b36"
+color_fg: "#fdf6e3"
+
+color_base03: "#002b36"
+color_base02: "#073642"
+color_base01: "#586e75"
+color_base00: "#657b83"
+
+color_base0: "#839496"
+color_base1: "#93a1a1"
+color_base2: "#eee8d5"
+color_base3: "#fdf6e3"
+
+brblack: "#002b36"
+brwhite: "#fdf6e3"
+yellow: "#b58900"
+orange: "#cb4b16"
+red: "#dc322f"
+magenta: "#d33682"
+violet: "#6c71c4"
+blue: "#268bd2"
+cyan: "#2aa198"
+green: "#859900"
+
+
+# |sed 's/#002b36/{{ color_base03 }}/g'
+# |sed 's/#073642/{{ color_base02 }}/g'
+# |sed 's/#586e75/{{ color_base01 }}/g'
+# |sed 's/#657b83/{{ color_base00 }}/g'
+
+# |sed 's/#839496/{{ color_base0 }}/g'
+# |sed 's/#93a1a1/{{ color_base1 }}/g'
+# |sed 's/#eee8d5/{{ color_base2 }}/g'
+# |sed 's/#fdf6e3/{{ color_base3 }}/g'
+
+# |sed 's/#fdf6e3/{{ brwhite }}/g'
+# |sed 's/#b58900/{{ yellow }}/g'
+# |sed 's/#cb4b16/{{ orange }}/g'
+# |sed 's/#dc322f/{{ red }}/g'
+# |sed 's/#d33682/{{ magenta }}/g'
+# |sed 's/#6c71c4/{{ violet }}/g'
+# |sed 's/#268bd2/{{ blue }}/g'
+# |sed 's/#2aa198/{{ cyan }}/g'
+# |sed 's/#859900/{{ green }}/g'
