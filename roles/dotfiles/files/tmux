@@ -1,3 +1,9 @@
+set -g default-terminal "screen-256color"
+
+set -g base-index 1
+setw -g mode-keys vi
+
+
 #### COLOUR (Solarized 256)
 
 # default statusbar colors
