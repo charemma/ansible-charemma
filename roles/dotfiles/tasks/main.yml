@@ -26,6 +26,12 @@
 - name: "Deploy .bashrc"
   ansible.builtin.copy: src=bashrc dest={{ ansible_env.HOME}}/.bashrc
 
+- name: "Deploy .bashrc_acme"
+  ansible.builtin.copy: src=bashrc_acme dest={{ ansible_env.HOME}}/.bashrc_acme
+
+- name: "Deploy .bashrc_debian"
+  ansible.builtin.copy: src=bashrc_debian dest={{ ansible_env.HOME}}/.bashrc_debian
+
 - name: "Deploy .rcrc"
   ansible.builtin.copy: src=rcrc dest={{ ansible_env.HOME}}/.rcrc
 
