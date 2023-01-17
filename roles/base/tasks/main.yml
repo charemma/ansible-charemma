@@ -29,6 +29,8 @@
     - xclip
     - xterm
     - zathura
+    - taskwarrior
+    - timewarrior
 
 - name: "Clone repository alacritty"
   ansible.builtin.git:
