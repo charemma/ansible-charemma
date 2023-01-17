@@ -160,6 +160,24 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
+
+# Jansen goodies
+# xprop
+# WM_CLASS(STRING) = "pavucontrol", "Pavucontrol"
+#                     ^ instance=    ^ class=
+#for_window [title="padterm"] move scratchpad
+for_window [class="Pavucontrol"] floating enable, resize set 800 1200
+for_window [window_role="pop-up"] floating enable, resize set 800 600
+for_window [window_role="task_dialog"] floating enable, resize set 800 600
+#for_window [title="VimWiki"] floating enable, resize set 800 600
+# for_window [class="VimWiki"] mark "VimWiki", move scratchpad
+#for_window [class="Blueman-manager"] floating enable, resize set 800 600
+for_window [class="KeePassXC"] floating enable, resize set 800 600
+
+
+# end Jansen
+
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
