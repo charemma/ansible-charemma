@@ -30,6 +30,11 @@
     scope: global
     value: vim
 
+- name: "Add alias to rinse changes in git repos"
+  community.general.git_config:
+    name: alias.rinse
+    scope: global
+    value: '!git submodule foreach --recursive git clean -xfd && git submodule sync --recursive && git restore . --recurse-submodules'
 - name: "Adding user {{ ansible_user_id }} to groups"
   user:
     name: "{{ ansible_user_id }}"
