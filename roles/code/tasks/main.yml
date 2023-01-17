@@ -16,7 +16,7 @@
   community.general.git_config:
     name: user.name
     scope: global
-    value: "{{ USER_NAME }}" 
+    value: "{{ USER_NAME }}"
 
 - name: "Update user.email in .gitconfig"
   community.general.git_config:
@@ -26,9 +26,9 @@
 
 - name: "Update editor in .gitconfig"
   community.general.git_config:
-     name: core.editor
-     scope: global
-     value: vim
+    name: core.editor
+    scope: global
+    value: vim
 
 - name: "Adding user {{ ansible_user_id }} to groups"
   user:
