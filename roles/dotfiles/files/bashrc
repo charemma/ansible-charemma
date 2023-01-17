@@ -3,6 +3,17 @@ GOPATH=$HOME/go export GOPATH
 PATH=$GOPATH/bin:$PATH export PATH
 PATH=$PATH:/usr/local/go/bin export PATH
 
+# setup taskwarrior
+TASKDATA=~/ownCloud/task
+export TASKDATA
+
+TASKRC=$TASKDATA/taskrc
+export TASKRC
+
+# setup timewarrior
+TIMEWARRIORDB=$TASKDATA/timewarrior
+export TIMEWARRIORDB
+
 # plan9/acme
 PLAN9=$HOME/plan9 export PLAN9
 PATH=$PATH:$PLAN9/bin export PATH
