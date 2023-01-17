@@ -35,6 +35,13 @@
     name: alias.rinse
     scope: global
     value: '!git submodule foreach --recursive git clean -xfd && git submodule sync --recursive && git restore . --recurse-submodules'
+
+- name: "Add alias to list last modified remote gib branches"
+  community.general.git_config:
+    name: alias.brv
+    scope: global
+    value: '!git branch -a -v --sort=-committerdate --format="%(HEAD)%(refname:short)|%(committerdate:relative)|%(subject)|%(authorname)" | column -ts"|"'
+
 - name: "Adding user {{ ansible_user_id }} to groups"
   user:
     name: "{{ ansible_user_id }}"
