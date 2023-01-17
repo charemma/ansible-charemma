@@ -1,5 +1,6 @@
 
 ANSIBLE_EXTRA_ARGS=
+SHELL := /bin/bash
 
 test:
 	@docker build -t ansible-charemma -f tests/Dockerfile . --build-arg ANSIBLE_EXTRA_ARGS=$(ANSILBE_EXTRA_ARGS)
