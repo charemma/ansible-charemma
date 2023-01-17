@@ -20,7 +20,7 @@ ansible-playbook -K -i "localhost," playbook.yml
 
 ```
 source env.sh
-ansible-playbook -K -i "localhost," playbook.yml -e USER_EMAIL -e VPN_NET_IF
+ansible-playbook -K -i "localhost," playbook.yml -e USER_EMAIL=$USER_EMAIL -e VPN_NET_IF=$VPN_NET_IF
 ```
 
 ## Run playbook with selected roles
