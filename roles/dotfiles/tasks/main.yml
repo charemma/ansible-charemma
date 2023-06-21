@@ -20,8 +20,8 @@
   shell: fc-cache -fv
   when: fonts.changed
 
-- name: "Deploy .config/alacritty/alacritty.yml"
-  ansible.builtin.template: src=alacritty.yml.j2 dest={{ ansible_env.HOME}}/.alacritty.yml
+- name: "Deploy .config/alacritty/alacritty.toml"
+  ansible.builtin.template: src=alacritty.toml.j2 dest={{ ansible_env.HOME}}/.alacritty.toml
 
 - name: "Deploy .bashrc"
   ansible.builtin.copy: src=bashrc dest={{ ansible_env.HOME}}/.bashrc
