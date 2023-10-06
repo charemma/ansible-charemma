@@ -7,10 +7,12 @@
     state: present
   with_items:
     - apt-file
+    - bat
     - curl
     - flameshot
     - fonts-firacode
     - fonts-font-awesome
+    - fzf
     - gcc
     - git
     - i3
@@ -31,6 +33,12 @@
     - zathura
     - taskwarrior
     - timewarrior
+
+- name: "Clone tmux plugin manager"
+  ansible.builtin.git:
+    repo: 'https://github.com/tmux-plugins/tpm'
+    dest: "{{ ansible_env.HOME }}/.tmux/plugins/tpm"
+    update: yes
 
 - name: "Clone repository alacritty"
   ansible.builtin.git:
