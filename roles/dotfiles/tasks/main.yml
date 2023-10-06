@@ -11,7 +11,7 @@
 
 - name: "Installing Nerd Font"
   ansible.builtin.unarchive:
-    src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Hack.zip
+    src: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hack.tar.xz
     remote_src: yes
     dest: "{{ ansible_env.HOME }}/.local/share/fonts/"
   register: fonts
