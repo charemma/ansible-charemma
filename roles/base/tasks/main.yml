@@ -19,10 +19,6 @@
     - jq
     - keepassxc
     - libfontconfig-dev
-    - libx11-dev
-    - libxext-dev
-    - libxt-dev
-    - mplayer
     - openvpn
     - rofi
     - suckless-tools
@@ -30,9 +26,6 @@
     - vim
     - xclip
     - xterm
-    - zathura
-    - taskwarrior
-    - timewarrior
 
 - name: "Clone tmux plugin manager"
   ansible.builtin.git:
@@ -40,16 +33,3 @@
     dest: "{{ ansible_env.HOME }}/.tmux/plugins/tpm"
     update: yes
 
-- name: "Clone repository plan9port"
-  ansible.builtin.git:
-    repo: 'https://github.com/charemma/plan9port'
-    dest: "{{ ansible_env.HOME }}/plan9"
-    update: no
-
-- name: "Build Plan9"
-  ansible.builtin.shell: |
-    git pull
-    ./INSTALL
-  args:
-    chdir: "{{ ansible_env.HOME }}/plan9"
-    creates: install.sum

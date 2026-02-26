@@ -1,31 +1,43 @@
 # ansible-charemma
 
-Ansible plabook and roles to install my required environment and tools
+Ansible Playbook zum Provisionieren meiner Entwicklungsumgebung auf Debian-Systemen.
+Installiert Systempakete, Dev-Tools und bootstrapped die Dotfile-Verwaltung via [chezmoi](https://www.chezmoi.io/).
 
-## Prerequisites
+## Rollen
+
+| Rolle | Beschreibung |
+|-------|-------------|
+| base | Systempakete (i3, tmux, vim, fzf, etc.), tmux plugin manager |
+| code | Dev-Tools (docker, go, git), Git-Config, Docker-Setup |
+| chezmoi | Installiert chezmoi und applied Dotfiles von [charemma/dotfiles](https://github.com/charemma/dotfiles) |
+| infosec | Security-Tools (nmap, wireshark, binwalk, gnuradio) |
+
+## Voraussetzungen
 
 ```
 pip3 install -r requirements.txt
 ansible-galaxy install -r requirements-ansible.yml
 ```
 
-## Run playbook with all roles
+## Ausfuehren
 
-```
-source env.sh
-ansible-playbook -K -i "localhost," playbook.yml
-```
-
-## Run playbook: Overwrite default var
-
-```
-source env.sh
-ansible-playbook -K -i "localhost," playbook.yml -e USER_EMAIL=$USER_EMAIL -e VPN_NET_IF=$VPN_NET_IF
+```bash
+just deploy-all       # Alle Rollen
+just deploy-base      # Nur Systempakete
+just deploy-code      # Dev-Tools, Docker, Git
+just deploy-chezmoi   # Dotfiles via chezmoi
+just deploy-infosec   # Security-Tools
 ```
 
-## Run playbook with selected roles
+Git-Email ueberschreiben (z.B. fuer Kundenprojekte):
 
-*Only role dotfiles*
+```bash
+just deploy-code email=me@client.org
 ```
-ansible-playbook -i "localhost," playbook.yml -t dotfiles
+
+## Testen
+
+```bash
+just lint             # ansible-lint
+just test             # Voller Playbook-Test im Docker-Container (Debian 12)
 ```

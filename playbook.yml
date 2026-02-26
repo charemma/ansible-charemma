@@ -1,12 +1,9 @@
 - hosts: all
   connection: local
 
-  vars:
-    sources: "{{ ansible_env.HOME }}/src"
-  
   roles:
     - { role: base, tags: ['base'] }
-    - { role: dotfiles, tags: ['dotfiles'] }
     - { role: code, tags: ['code'] }
+    - { role: chezmoi, tags: ['chezmoi'] }
     - { role: infosec, tags: ['infosec'] }
 

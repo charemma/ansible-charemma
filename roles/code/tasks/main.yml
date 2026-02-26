@@ -50,4 +50,24 @@
       - docker
     append: yes
   become: yes
+  register: user_groups
+
+- name: "Enable and start docker service"
+  ansible.builtin.systemd:
+    name: docker
+    state: started
+    enabled: yes
+  become: yes
+  when: ansible_service_mgr == "systemd"
+
+- name: "Verify docker access"
+  ansible.builtin.command: docker info
+  become: yes
+  changed_when: false
+  when: ansible_service_mgr == "systemd"
+
+- name: "Re-login required for docker group"
+  ansible.builtin.debug:
+    msg: "User {{ ansible_user_id }} wurde zur docker-Gruppe hinzugefuegt. Ein Re-Login ist noetig um docker ohne sudo nutzen zu koennen."
+  when: user_groups.changed
 
