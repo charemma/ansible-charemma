@@ -1,6 +1,6 @@
 ---
 - name: "Install developer tools"
-  become: yes
+  become: true
   ansible.builtin.apt:
     name: "{{ item }}"
     state: present
@@ -16,13 +16,13 @@
   community.general.git_config:
     name: user.name
     scope: global
-    value: "{{ USER_NAME }}"
+    value: "{{ code_user_name }}"
 
 - name: "Update user.email in .gitconfig"
   community.general.git_config:
     name: user.email
     scope: global
-    value: "{{ USER_EMAIL }}"
+    value: "{{ code_user_email }}"
 
 - name: "Update editor in .gitconfig"
   community.general.git_config:
@@ -36,38 +36,38 @@
     scope: global
     value: '!git submodule foreach --recursive git clean -xfd && git submodule sync --recursive && git restore . --recurse-submodules'
 
-- name: "Add alias to list last modified remote gib branches"
+- name: "Add alias to list last modified remote git branches"
   community.general.git_config:
     name: alias.brv
     scope: global
     value: '!git branch -a -v --sort=-committerdate --format="%(HEAD)%(refname:short)|%(committerdate:relative)|%(subject)|%(authorname)" | column -ts"|"'
 
-- name: "Adding user {{ ansible_user_id }} to groups"
-  user:
-    name: "{{ ansible_user_id }}"
+- name: "Add user to sudo and docker groups"
+  ansible.builtin.user:
+    name: "{{ ansible_facts.user_id }}"
     groups:
       - sudo
       - docker
-    append: yes
-  become: yes
-  register: user_groups
+    append: true
+  become: true
+  register: code_user_groups
 
 - name: "Enable and start docker service"
   ansible.builtin.systemd:
     name: docker
     state: started
-    enabled: yes
-  become: yes
-  when: ansible_service_mgr == "systemd"
+    enabled: true
+  become: true
+  when: ansible_facts.service_mgr == "systemd"
 
 - name: "Verify docker access"
   ansible.builtin.command: docker info
-  become: yes
+  become: true
   changed_when: false
-  when: ansible_service_mgr == "systemd"
+  when: ansible_facts.service_mgr == "systemd"
 
-- name: "Re-login required for docker group"
+- name: "Re-login required for docker group" # noqa: no-handler
   ansible.builtin.debug:
-    msg: "User {{ ansible_user_id }} wurde zur docker-Gruppe hinzugefuegt. Ein Re-Login ist noetig um docker ohne sudo nutzen zu koennen."
-  when: user_groups.changed
-
+    msg: "User was added to the docker group. A re-login is required to use docker without sudo."
+  changed_when: false
+  when: code_user_groups.changed

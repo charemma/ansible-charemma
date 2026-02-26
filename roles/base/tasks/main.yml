@@ -1,7 +1,6 @@
 ---
-
 - name: "Install base applications"
-  become: yes
+  become: true
   ansible.builtin.apt:
     name: "{{ item }}"
     state: present
@@ -30,6 +29,5 @@
 - name: "Clone tmux plugin manager"
   ansible.builtin.git:
     repo: 'https://github.com/tmux-plugins/tpm'
-    dest: "{{ ansible_env.HOME }}/.tmux/plugins/tpm"
-    update: yes
-
+    dest: "{{ ansible_facts.env.HOME }}/.tmux/plugins/tpm"
+    version: master

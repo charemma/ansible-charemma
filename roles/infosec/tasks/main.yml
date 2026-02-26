@@ -1,7 +1,6 @@
 ---
-
 - name: "Install infosec applications"
-  become: yes
+  become: true
   ansible.builtin.apt:
     name: "{{ item }}"
     state: present

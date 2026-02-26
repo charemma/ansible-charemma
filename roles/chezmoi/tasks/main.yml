@@ -1,7 +1,6 @@
 ---
-
 - name: "Install chezmoi"
-  become: yes
+  become: true
   ansible.builtin.shell: |
     sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
   args:
@@ -10,4 +9,4 @@
 - name: "Initialize and apply dotfiles"
   ansible.builtin.command: chezmoi init --apply charemma
   args:
-    creates: "{{ ansible_env.HOME }}/.local/share/chezmoi"
+    creates: "{{ ansible_facts.env.HOME }}/.local/share/chezmoi"

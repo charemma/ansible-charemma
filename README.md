@@ -1,43 +1,44 @@
-# ansible-charemma
+# setup
 
-Ansible Playbook zum Provisionieren meiner Entwicklungsumgebung auf Debian-Systemen.
-Installiert Systempakete, Dev-Tools und bootstrapped die Dotfile-Verwaltung via [chezmoi](https://www.chezmoi.io/).
+Provisioning my development environment on Debian systems. Uses Ansible for system packages and dev tools, [chezmoi](https://www.chezmoi.io/) for dotfiles, and [Nix](https://nixos.org/) for reproducible dev dependencies.
 
-## Rollen
-
-| Rolle | Beschreibung |
-|-------|-------------|
-| base | Systempakete (i3, tmux, vim, fzf, etc.), tmux plugin manager |
-| code | Dev-Tools (docker, go, git), Git-Config, Docker-Setup |
-| chezmoi | Installiert chezmoi und applied Dotfiles von [charemma/dotfiles](https://github.com/charemma/dotfiles) |
-| infosec | Security-Tools (nmap, wireshark, binwalk, gnuradio) |
-
-## Voraussetzungen
-
-```
-pip3 install -r requirements.txt
-ansible-galaxy install -r requirements-ansible.yml
-```
-
-## Ausfuehren
+## Bootstrap (fresh machine)
 
 ```bash
-just deploy-all       # Alle Rollen
-just deploy-base      # Nur Systempakete
-just deploy-code      # Dev-Tools, Docker, Git
-just deploy-chezmoi   # Dotfiles via chezmoi
-just deploy-infosec   # Security-Tools
+./bootstrap.sh
 ```
 
-Git-Email ueberschreiben (z.B. fuer Kundenprojekte):
+Installs Nix and runs the full playbook.
+
+## Roles
+
+| Role | Description |
+|------|-------------|
+| base | System packages (i3, tmux, vim, fzf, etc.), tmux plugin manager |
+| code | Dev tools (docker, go, git), git config, docker setup |
+| chezmoi | Installs chezmoi and applies dotfiles from [charemma/dotfiles](https://github.com/charemma/dotfiles) |
+| infosec | Security tools (nmap, wireshark, binwalk, gnuradio) |
+
+## Usage
+
+Activate the dev shell (or use [direnv](https://direnv.net/) for automatic activation):
 
 ```bash
-just deploy-code email=me@client.org
+nix develop
 ```
 
-## Testen
+Then run the playbook:
 
 ```bash
-just lint             # ansible-lint
-just test             # Voller Playbook-Test im Docker-Container (Debian 12)
+ansible-playbook -K playbook.yml              # All roles
+ansible-playbook -K playbook.yml -t base      # System packages only
+ansible-playbook -K playbook.yml -t code      # Dev tools, docker, git
+ansible-playbook playbook.yml -t chezmoi      # Dotfiles via chezmoi
+ansible-playbook -K playbook.yml -t infosec   # Security tools
+```
+
+Override git email (e.g. for client projects):
+
+```bash
+ansible-playbook -K playbook.yml -t code -e code_user_email=me@client.org
 ```

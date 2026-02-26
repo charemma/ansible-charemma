@@ -1,4 +1,5 @@
-- hosts: all
+- name: "Provision workstation"
+  hosts: all
   connection: local
 
   roles:
@@ -6,4 +7,3 @@
     - { role: code, tags: ['code'] }
     - { role: chezmoi, tags: ['chezmoi'] }
     - { role: infosec, tags: ['infosec'] }
-
